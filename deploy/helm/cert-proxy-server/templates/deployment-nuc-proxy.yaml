@@ -48,7 +48,12 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
-          resources: {}
+          resources:
+            requests:
+              cpu:  1m
+              memory: 10M
+            limits:
+              memory: 50M
           volumeMounts:
             - name: nginx-html
               mountPath: /usr/share/nginx/html

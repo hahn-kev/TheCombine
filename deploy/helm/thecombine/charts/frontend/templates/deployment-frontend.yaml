@@ -69,7 +69,12 @@ spec:
           ports:
             - containerPort: 80
             - containerPort: 443
-          resources: {}
+          resources:
+            requests:
+              cpu:  1m
+              memory: 20M
+            limits:
+              memory: 40M
       restartPolicy: Always
 {{- if ne .Values.global.pullSecretName "None" }}
       imagePullSecrets:

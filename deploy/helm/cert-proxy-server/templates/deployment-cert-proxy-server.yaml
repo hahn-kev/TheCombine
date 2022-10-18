@@ -63,7 +63,12 @@ spec:
           image: {{ template "cert-proxy-server.containerImage" . }}
           imagePullPolicy: {{ template "cert-proxy-server.imagePullPolicy" . }}
           name: combine-cert-proxy
-          resources: {}
+          resources:
+            requests:
+              cpu:  2m
+              memory: 100M
+            limits:
+              memory: 150M
       restartPolicy: Always
 {{- if ne .Values.global.pullSecretName "None" }}
       imagePullSecrets:

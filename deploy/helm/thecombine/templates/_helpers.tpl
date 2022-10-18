@@ -1,12 +1,17 @@
 {{/* Build container image name */}}
-{{- define "thecombine.containerImage" -}}
-  {{- if .Values.global.imageRegistry }}
-    {{- $registry := .Values.global.imageRegistry }}
-    {{- if contains "awsEcr" .Values.global.imageRegistry }}
-      {{- $registry = printf "%s.dkr.ecr.%s.amazonaws.com" .Values.global.awsAccount .Values.global.awsDefaultRegion }}
-    {{- end }}
-    {{- printf "%s/%s:%s" $registry .Values.imageName .Values.global.imageTag }}
+{{- define "thecombine.ingressHost" -}}
+  {{- if .Values.ingressHost }}
+    {{- print .Values.ingressHost }}
   {{- else }}
-    {{- printf "%s:%s" .Values.imageName .Values.global.imageTag }}
+    {{- print .Values.global.serverName }}
+  {{- end }}
+{{- end }}
+
+{{- define "thecombine.secretName" -}}
+  {{- if .Values.tlsSecretName }}
+    {{- print .Values.tlsSecretName }}
+  {{- else }}
+    {{- $hostString := replace "." "-" .Values.global.serverName }}
+    {{- print $hostString "-tls" }}
   {{- end }}
 {{- end }}

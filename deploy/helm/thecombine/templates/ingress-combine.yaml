@@ -16,14 +16,10 @@ spec:
   ingressClassName: {{ .Values.ingressClass }}
   tls:
   - hosts:
-    - {{ .Values.global.serverName }}
-{{- if .Values.tlsSecretName }}
-    secretName: {{ .Values.tlsSecretName }}
-{{- else }}
-    secretName: {{ replace "." "-" .Values.global.serverName }}-tls
-{{- end }}
+    - {{ template "thecombine.ingressHost" . }}
+    secretName: {{ template "thecombine.secretName" . }}
   rules:
-  - host: {{ .Values.global.serverName }}
+  - host: {{ template "thecombine.ingressHost" . }}
     http:
       paths:
       - backend:
@@ -33,6 +29,3 @@ spec:
               number: 80
         path: /
         pathType: Prefix
-{{- if ne .Values.global.serverName "localhost" }}
-    host: {{ .Values.global.serverName }}
-{{- end }}

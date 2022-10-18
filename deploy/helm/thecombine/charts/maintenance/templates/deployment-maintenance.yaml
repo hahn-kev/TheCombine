@@ -87,7 +87,12 @@ spec:
                 configMapKeyRef:
                   key: backup_filter
                   name: env-maintenance
-          resources: {}
+          resources:
+            requests:
+              cpu:  200m
+              memory: 200M
+            limits:
+              memory: 500M
       restartPolicy: Always
 {{- if ne .Values.global.pullSecretName "None" }}
       imagePullSecrets:
