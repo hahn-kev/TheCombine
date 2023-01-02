@@ -51,9 +51,11 @@ spec:
           resources:
             requests:
               cpu:  25m
-              memory: 1G
+              memory: 1Gi
+{{- if .Values.global.includeResourceLimits }}
             limits:
-              memory: 2G
+              memory: 2Gi
+{{- end }}
           volumeMounts:
             - mountPath: /data/db
               name: database-data

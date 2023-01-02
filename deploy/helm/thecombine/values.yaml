@@ -30,6 +30,7 @@ global:
   imageRegistry: awsEcr
   # Default AWS S3 location
   awsS3Location: "thecombine.app"
+  includeResourceLimits: false
 
 aws-login:
   enabled: true

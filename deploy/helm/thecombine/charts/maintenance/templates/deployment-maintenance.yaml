@@ -90,9 +90,11 @@ spec:
           resources:
             requests:
               cpu:  200m
-              memory: 200M
+              memory: 1.1Gi
+{{- if .Values.global.includeResourceLimits }}
             limits:
-              memory: 500M
+              memory: 2Gi
+{{- end }}
       restartPolicy: Always
 {{- if ne .Values.global.pullSecretName "None" }}
       imagePullSecrets:
