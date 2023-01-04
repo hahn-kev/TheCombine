@@ -90,10 +90,10 @@ spec:
           resources:
             requests:
               cpu:  200m
-              memory: 1.1Gi
+              memory: 1100Mi
 {{- if .Values.global.includeResourceLimits }}
             limits:
-              memory: 2Gi
+              memory: 4Gi
 {{- end }}
       restartPolicy: Always
 {{- if ne .Values.global.pullSecretName "None" }}
